@@ -27,5 +27,27 @@
 
       border-radius: 50%;
     }
+
+  }
+}
+
+.start-animate-rotating {
+  animation-name: animationRotate;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+}
+
+.stop-animate-rotating {
+  animation-play-state: paused;
+}
+
+@keyframes animationRotate {
+  from {
+    rotate: 0deg;
+  }
+
+  to {
+    rotate: 360deg;
   }
 }

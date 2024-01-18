@@ -1,18 +1,18 @@
 /**
- * Начальная конфигурация для объекта progressBar, который создается как экземпляр класса ниже
+ * Начальная конфигурация для объекта progressBar.
  *
  * @typedef {Object} Config
- * @property {number} startValue - Начальное значение для progress-bar
- * @property {number} endValue - Конечное значение для progress-bar
- * @property {number} speedMs - Продолжительность анимации в мс
+ * @property {number} startValue - Начальное значение для progress-bar.
+ * @property {number} endValue - Конечное значение для progress-bar.
+ * @property {number} speedMs - Продолжительность анимации в мс.
  * @property {boolean} startAfterCreated - Запустить progress-bar сразу после создания экзепляра объекта?
  */
 
 /**
- * Класс, который представляет progress-bar
+ * Класс для создания и управления прогресс-баром.
  *
  * @class
- * @classdesc Этот класс можно использовать для создания экземпляра progress-bar
+ * @classdesc Этот класс представляет собой прогресс-бар, который можно анимировать и настроить.
  */
 class ProgressBar {
   /**
@@ -27,20 +27,21 @@ class ProgressBar {
   #duration = null;
   #frameRate = 10;
   #timerProgress = null;
+  #showStatus = "block";
 
   /**
-   * Функция-наблюдатель за изменениями значения ввода.
+   * Функции-наблюдатели за изменениями значения ввода.
    * @private
    * @type {Function[]}
    */
   #observers = [];
 
   /**
-   * Создает экземпляр класса ProgressBar
+   * Создает экземпляр класса ProgressBar.
    *
    * @constructor
-   * @param {string} progressSelector - Селектор html-элемента progress-bar
-   * @param {Config} config - Начальная конфигурация объекта progressBar
+   * @param {string} progressSelector - CSS селектор для выбора элемента progress-bar.
+   * @param {Config} config - Начальная конфигурация объекта progressBar.
    */
   constructor(progressSelector, config = {}) {
     this.#progressBarHtmlElement = document.querySelector(progressSelector);
@@ -83,9 +84,9 @@ class ProgressBar {
   }
 
   /**
-   * Обновляет экземпляр класса ProgressBar
+   * Обновляет конфигурацию прогресс-бара.
    *
-   * @param {Config} config - Начальная конфигурация объекта progressBar
+   * @param {Config} config - Новая конфигурация для прогресс-бара.
    */
   updateConfig(config = {}) {
     const {
@@ -114,6 +115,9 @@ class ProgressBar {
     }
   }
 
+  /**
+   * Запускает анимацию прогресс-бара.
+   */
   startProgressBar() {
     if (this.#timerProgress !== null) {
       clearInterval(this.#timerProgress);
@@ -136,17 +140,73 @@ class ProgressBar {
         clearInterval(this.#timerProgress); // Останавливаем интервал
         this.#timerProgress = null;
 
-        for (const observer of this.#observers) {
-          observer(this.#currentProgress);
-        }
+        this.#send(this.#currentProgress);
       }
 
       this.#updateProgressBar(this.#currentProgress);
     }, this.#frameRate);
   }
 
+  /**
+   * Добавляет функцию-наблюдатель за изменением значения прогресс-бара.
+   * Функция-наблюдатель должна принимать два параметра: текущее числовое значение прогресса и HTML элемент прогресс-бара.
+   *
+   * @param {Function} observer - Функция, вызываемая при изменении значения.
+   * @param {number} observer.value - Текущее значение прогресса.
+   * @param {HTMLElement} observer.htmlElement - HTML элемент прогресс-бара.
+   */
   update(observer) {
     this.#observers.push(observer);
+  }
+
+  /**
+   * Отправляет текущее значение прогресса всем наблюдателям.
+   * @private
+   * @param {number} value - Текущее значение прогресса.
+   */
+  #send(value) {
+    for (const observer of this.#observers) {
+      observer(value, this.#progressBarHtmlElement);
+    }
+  }
+
+  /**
+   * Переключает видимость прогресс-бара.
+   */
+  turnShowOrHide() {
+    if (this.#showStatus === "block") this.#showStatus = "none";
+    else this.#showStatus = "block";
+
+    this.#progressBarHtmlElement.style.display = this.#showStatus;
+  }
+
+  /**
+   * Включает или выключает анимацию вращения прогресс-бара.
+   *
+   * @param {boolean} statusRotate - Указывает, следует ли включить анимацию вращения.
+   */
+  turnOnOrOffAnimateRotateBlock(statusRotate) {
+    if (statusRotate) {
+      // this.#progressBarHtmlElement.style.animationName = "animationRotate";
+      // this.#progressBarHtmlElement.style.animationDuration = "2s";
+      // this.#progressBarHtmlElement.style.animationIterationCount = "infinite";
+      // this.#progressBarHtmlElement.style.animationPlayState = "running";
+
+      // Любой из вариантов, по моему мнению, правильный, можно расскоментировать код выше,
+      // закоментировав код ниже, по моим правилам, оставить можно только один вариант
+
+      this.#progressBarHtmlElement.classList.remove("stop-animate-rotating");
+      this.#progressBarHtmlElement.classList.add("start-animate-rotating");
+    } else {
+      // this.#progressBarHtmlElement.style.animationPlayState = "paused";
+
+      // точно так же делаем здесь, если мы в первом блоке ветвления расскоментировали код
+      // управления анимациями вручную, то мы должны закоментировать методы добавления и
+      // удаления классов ниже
+
+      this.#progressBarHtmlElement.classList.add("stop-animate-rotating");
+      this.#progressBarHtmlElement.classList.remove("start-animate-rotating");
+    }
   }
 }
 

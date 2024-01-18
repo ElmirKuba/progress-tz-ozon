@@ -1,1 +1,51 @@
-.ui-toggler {}
+.ui-toggler {
+  display: inline-grid;
+
+  &__checkbox {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    appearance: none;
+  }
+
+  &__turn {
+    width: 70px;
+    height: 42px;
+
+    background-color: rgb(224, 230, 239);
+
+    border-radius: 18.75px;
+
+    position: relative;
+
+    transition: .5s background-color;
+
+    &::before {
+      content: '';
+
+      display: block;
+
+      position: absolute;
+      width: 33px;
+      height: 33px;
+
+      border-radius: 50%;
+
+      background-color: rgb(255, 255, 255);
+
+      left: 4.5px;
+      top: 4.5px;
+
+      transition: .5s left;
+    }
+  }
+
+  &__checkbox:checked+&__turn {
+    background-color: rgb(0, 91, 255);
+  }
+
+  &__checkbox:checked+&__turn::before {
+    left: calc(70px - 4.5px - 33px);
+  }
+}
