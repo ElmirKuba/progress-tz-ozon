@@ -52,6 +52,16 @@ class ProgressBar {
       startAfterCreated = false,
     } = config;
 
+    if (startValue < 0 || startValue > 100) {
+      alert("Начальное значение должно быть от 0 до 100!");
+      return;
+    }
+
+    if (endValue < 0 || endValue > 100) {
+      alert("Начальное значение должно быть от 0 до 100!");
+      return;
+    }
+
     this.#currentProgress = startValue;
     this.#endValue = endValue;
     this.#duration = speedMs;
@@ -84,6 +94,16 @@ class ProgressBar {
       speedMs = this.#duration,
       startAfterCreated = false,
     } = config;
+
+    if (startValue < 0 || startValue > 100) {
+      alert("Начальное значение должно быть от 0 до 100!");
+      return;
+    }
+
+    if (endValue < 0 || endValue > 100) {
+      alert("Начальное значение должно быть от 0 до 100!");
+      return;
+    }
 
     this.#currentProgress = startValue;
     this.#endValue = endValue;

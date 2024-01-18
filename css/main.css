@@ -124,7 +124,7 @@ body {
   height: 100%;
   background-color: yellowgreen;
   display: flex;
-  justify-content: center;
+  justify-content: left;
   -moz-column-gap: 20px;
        column-gap: 20px;
 }
