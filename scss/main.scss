@@ -1,0 +1,35 @@
+:root {}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: sans-serif;
+  font-size: 26px;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
+
+  @media (max-width: 470px) {
+    font-size: 12px;
+  }
+}
+
+@import './../components/wrapper/_wrapper';
+@import './../components/progress-block/_progress-block';
+@import './../components/progress-bar/_progress-bar';
+@import './../components/controls/_controls';
+@import './../components/control/_control';
+@import './../components/ui-input/_ui-input';
+@import './../components/ui-toggler/_ui-toggler';

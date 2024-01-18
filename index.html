@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Тестовое "Progress" - Ozon</title>
+
+    <link rel="stylesheet" href="./css/main.css" />
+    <script defer src="./scripts/main.js" type="module"></script>
+  </head>
+  <body>
+    <!-- Компонент "wrapper" -->
+    <div class="wrapper">
+      <!-- Компонент "progress-block" -->
+      <div class="progress-block">
+        <div class="progress-block__wrapper">
+          <div class="progress-block__view">
+            Progress
+
+            <div class="progress-block__small-wrapper">
+              <div class="progress-block__bar-wrapper">
+                <!-- Компонент "progress-bar" -->
+                <div class="progress-bar">
+                  <div class="progress-bar__circle"></div>
+                </div>
+                <!-- Компонент "progress-bar" -->
+              </div>
+            </div>
+          </div>
+
+          <div class="progress-block__controls">
+            <div class="progress-block__controls-wrapper">
+              <!-- Компонент "controls" -->
+              <div class="controls">
+                <!-- Компонент "control" -->
+                <div class="control">
+                  <div class="control__regulator">
+                    <!-- Компонент "ui-input" -->
+                    <input class="ui-input" id="progress-value" type="text" />
+                    <!-- Компонент "ui-input" -->
+                  </div>
+                  <div class="control__caption">Value</div>
+                </div>
+                <!-- Компонент "control" -->
+
+                <!-- Компонент "control" -->
+                <div class="control">
+                  <div class="control__regulator">
+                    <!-- Компонент "ui-toggler" -->
+                    <label class="ui-toggler">
+                      <input type="checkbox" class="ui-toggler__checkbox" />
+                      <span class="ui-toggler__turn"></span>
+                    </label>
+                    <!-- Компонент "ui-toggler" -->
+                  </div>
+                  <div class="control__caption">Animate</div>
+                </div>
+                <!-- Компонент "control" -->
+
+                <!-- Компонент "control" -->
+                <div class="control">
+                  <div class="control__regulator">
+                    <!-- Компонент "ui-toggler" -->
+                    <label class="ui-toggler">
+                      <input type="checkbox" class="ui-toggler__checkbox" />
+                      <span class="ui-toggler__turn"></span>
+                    </label>
+                    <!-- Компонент "ui-toggler" -->
+                  </div>
+                  <div class="control__caption">Hide</div>
+                </div>
+                <!-- Компонент "control" -->
+              </div>
+              <!-- Компонент "controls" -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Компонент "progress-block" -->
+    </div>
+    <!-- Компонент "wrapper" -->
+  </body>
+</html>
+
+<!-- 1,775 -->
